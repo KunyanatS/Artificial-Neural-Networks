@@ -1,0 +1,31 @@
+# Artificial-Neural-Networks
+Prediction Mutual fund Using ANN
+
+>TMB <- read.csv("TMB.csv")
+>data1<-TMB
+>set.seed(99)
+>for(i in 1:3){
+>  data1[,i]<-(data1[,i]-min(data1[,i]))/(max(data1[,i])-min(data1[,i]))
+>}
+
+
+>train_data<-as.data.frame(data1[1:977,])
+>test_data<-as.data.frame(data1[1:977,])
+>n=names(TMB)
+
+
+
+>library("neuralnet")
+>f=x3~x1+x2
+>model=neuralnet(f,data=train_data,hidden=10,linear.output=T)
+>print(model)
+>summary(model)
+>plot(model)
+
+
+>output<-compute(model,test_data)
+>prediction<-output$net.result*(max(TMB$x3)-min(TMB$x3))+min(TMB$x3)
+
+
+
+>print(prediction)
